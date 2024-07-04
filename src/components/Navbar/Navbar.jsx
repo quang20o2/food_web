@@ -1,104 +1,116 @@
 import { useState } from 'react'
 import Box from '@mui/material/Box'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
 import SearchIcon from '@mui/icons-material/Search'
-import { assets } from '../../assets/assets'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import LoginIcon from '@mui/icons-material/Login'
+import LoginSharp from '@mui/icons-material/LoginSharp'
 import Button from '@mui/material/Button'
 import Badge from '@mui/material/Badge'
 import Tooltip from '@mui/material/Tooltip'
+import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { assets } from '../../assets/assets'
 
-const active = {
+const activeMenuStyle = {
   pb: '2px',
   borderBottom: '2px solid #49557e'
 }
+
 function Navbar() {
-  const [menu, setMenu] = useState('Home')
-  const handleMenuClick = (name) => {
-    setMenu(name)
+  const [activeMenu, setActiveMenu] = useState('Home')
+
+  const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+  const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md'))
+  const isLargeDevice = useMediaQuery((theme) => theme.breakpoints.down('lg'))
+
+  const handleMenuClick = (menuName) => {
+    setActiveMenu(menuName)
   }
+
   return (
     <Box
-      sx={{
-        p: '20px 0',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      py={2.5}
     >
+      {/* Logo */}
       <Box
-        sx={{
-          width: '150px'
-        }}
         component="img"
-        alt="Logo"
         src={assets.logo}
+        alt="Logo"
+        width={
+          isSmallDevice
+            ? '100px'
+            : isMediumDevice
+              ? '110px'
+              : isLargeDevice
+                ? '130px'
+                : '150px'
+        }
       />
-      <Box>
-        <List
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: '20px',
-            color: '#49557e',
-            fontSize: '18px'
-          }}
-        >
-          <ListItem
-            sx={menu === 'Home' ? active : {}}
-            onClick={() => handleMenuClick('Home')}
-          >
-            Home
-          </ListItem>
-          <ListItem
-            sx={menu === 'Menu' ? active : {}}
-            onClick={() => handleMenuClick('Menu')}
-          >
-            Menu
-          </ListItem>
-          <ListItem
-            sx={menu === 'Mobile App' ? active : {}}
-            onClick={() => handleMenuClick('Mobile App')}
-          >
-            Mobile App
-          </ListItem>
-          <ListItem
-            sx={menu === 'Contact Us' ? active : {}}
-            onClick={() => handleMenuClick('Contact Us')}
-          >
-            Contact Us
-          </ListItem>
-        </List>
-      </Box>
+
+      {/* Navigation Links */}
       <Box
         sx={{
-          display: 'flex',
+          display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex' },
+          gap: { md: 2.5, lg: 3.8, xl: 6.25 },
+          justifyContent: 'space-between',
           alignItems: 'center',
-          gap: '40px'
+          color: '#49557e',
+          cursor: 'pointer'
         }}
       >
+        {['Home', 'Menu', 'Mobile App', 'Contact Us'].map((item) => (
+          <Typography
+            key={item}
+            fontSize={{ md: 15, lg: 18, xl: 22 }}
+            variant="body1"
+            sx={activeMenu === item ? activeMenuStyle : {}}
+            onClick={() => handleMenuClick(item)}
+          >
+            {item}
+          </Typography>
+        ))}
+      </Box>
+
+      {/* Action Items */}
+      <Box
+        display="flex"
+        justifyContent="flex-end"
+        alignItems="center"
+        gap={2.5}
+      >
         <Tooltip title="Search">
-          <SearchIcon sx={{ color: '#49557e' }} fontSize="large" />
+          <SearchIcon
+            sx={{ color: '#49557e' }}
+            fontSize={
+              isSmallDevice ? 'small' : isLargeDevice ? 'medium' : 'large'
+            }
+          />
         </Tooltip>
+
         <Tooltip title="Cart">
           <Badge
             color="warning"
             variant="dot"
             sx={{ cursor: 'pointer', position: 'relative' }}
           >
-            <ShoppingCartIcon sx={{ color: '#49557e' }} fontSize="large" />
+            <ShoppingCartIcon
+              sx={{ color: '#49557e' }}
+              fontSize={
+                isSmallDevice ? 'small' : isLargeDevice ? 'medium' : 'large'
+              }
+            />
           </Badge>
         </Tooltip>
 
         <Button
           sx={{
-            fontSize: '16px',
+            fontSize: isSmallDevice ? '9px' : '14px',
             color: '#49557e',
             background: 'transparent',
-            p: '10px 30px',
+            py: isSmallDevice ? '3px' : '8px',
+            px: isSmallDevice ? '5px' : '16px',
             border: '1px solid tomato',
             borderRadius: '50px',
             transition: '0.3s',
@@ -109,7 +121,7 @@ function Navbar() {
           }}
           disableRipple
           variant="outlined"
-          endIcon={<LoginIcon fontSize="large" />}
+          endIcon={<LoginSharp fontSize={isSmallDevice ? 'small' : 'medium'} />}
         >
           Sign in
         </Button>

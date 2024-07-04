@@ -1,21 +1,34 @@
 import { useContext } from 'react'
 import { StoreContext } from '../../context/StoreContext'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useMediaQuery } from '@mui/material'
 import FoodItem from '../FoodItem/FoodItem'
 
 function FoodDisplay({ category }) {
   const { food_list } = useContext(StoreContext)
+
+  const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm')) // > 600px
+  const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md')) // > 900px
+
   return (
     <Box
       sx={{
         mt: '30px'
       }}
     >
-      <Typography variant="h2">Top dishes near you</Typography>
+      <Typography
+        variant="h2"
+        sx={{ fontSize: isSmallDevice ? '1.5rem' : '2rem' }}
+      >
+        Top dishes near you
+      </Typography>
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+          gridTemplateColumns: isSmallDevice
+            ? 'repeat(auto-fill, minmax(100px, 1fr))'
+            : isMediumDevice
+              ? 'repeat(auto-fill, minmax(160px, 1fr))'
+              : 'repeat(auto-fill, minmax(250px, 1fr))',
           mt: '30px',
           gap: '30px',
           rowGap: '30px',

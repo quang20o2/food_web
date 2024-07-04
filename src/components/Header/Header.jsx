@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography, useMediaQuery } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 const StyledBox = styled(Box)({
@@ -25,8 +25,7 @@ const StyledContentBox = styled(Box)({
   flexDirection: 'column',
   alignItems: 'start',
   gap: '1.5vw',
-  maxWidth: '48%',
-  bottom: '8%',
+  bottom: '20%',
   left: '6vw',
   opacity: 0,
   animation: 'fadeInUp 0.8s ease-in-out 0.5s forwards',
@@ -45,9 +44,7 @@ const StyledContentBox = styled(Box)({
 const StyledButton = styled(Button)({
   color: '#747474',
   fontWeight: 500,
-  padding: '1vw 2.3vw',
   backgroundColor: 'white',
-  fontSize: 'max(1vw, 13px)',
   borderRadius: '50px',
   '&:hover': {
     backgroundColor: '#f5f5f5'
@@ -56,19 +53,29 @@ const StyledButton = styled(Button)({
 })
 
 function Header() {
+  // const isMobileDevice = useMediaQuery((theme) => theme.breakpoints.down('xs')) // Áp dụng cho màn hình >
+  const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm')) // Áp dụng cho màn hình > 600px
+  const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md')) // Áp dụng cho màn hình > 900px
+  // const isLargeDevice = useMediaQuery((theme) => theme.breakpoints.down('lg')) // Áp dụng cho màn hình > 1200px
   return (
     <StyledBox>
-      <StyledContentBox>
+      <StyledContentBox
+        maxWidth={isSmallDevice ? '70%' : isMediumDevice ? '70%' : '50%'}
+      >
         <Typography
           variant="h2"
-          sx={{ fontWeight: 500, color: 'white', fontSize: 'max(4.5vw,22px)' }}
+          sx={{
+            color: 'white',
+            fontSize: isSmallDevice ? 'max(2vw, 24px)' : 'max(4.5vw,30px)'
+          }}
         >
           Order your favorite food here
         </Typography>
         <Typography
           sx={{
             fontSize: '1vw',
-            color: 'white'
+            color: 'white',
+            display: isSmallDevice ? 'none' : 'block'
           }}
         >
           Choose from a diverse menu featuring a delectable array of dishes
@@ -76,7 +83,15 @@ function Header() {
           mission is to satisfy your craving and elevate your dining experience,
           one delicious meal at a time.
         </Typography>
-        <StyledButton disableRipple>View Menu</StyledButton>
+        <StyledButton
+          disableRipple
+          sx={{
+            fontSize: isSmallDevice ? '10px' : '15px',
+            padding: isSmallDevice ? '0.8vw 1.8vw' : '1vw 2.3vw'
+          }}
+        >
+          View Menu
+        </StyledButton>
       </StyledContentBox>
     </StyledBox>
   )

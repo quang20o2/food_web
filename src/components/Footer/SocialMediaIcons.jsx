@@ -1,33 +1,4 @@
-// import { Box } from '@mui/material'
-// import {
-//   Facebook as FacebookIcon,
-//   Instagram as InstagramIcon,
-//   Twitter as TwitterIcon
-// } from '@mui/icons-material'
-
-// const SocialMediaIcons = ({ iconColors, iconSize }) => {
-//   return (
-//     <Box
-//       sx={{
-//         display: 'flex',
-//         alignItems: 'center',
-//         gap: '15px',
-//         '& > *': {
-//           width: iconSize,
-//           cursor: 'pointer'
-//         }
-//       }}
-//     >
-//       <FacebookIcon sx={{ color: iconColors.facebook }} fontSize="large" />
-//       <InstagramIcon sx={{ color: iconColors.instagram }} fontSize="large" />
-//       <TwitterIcon sx={{ color: iconColors.twitter }} fontSize="large" />
-//     </Box>
-//   )
-// }
-
-// export default SocialMediaIcons
-
-import { Box, Link, Typography } from '@mui/material'
+import { Box, Link, Typography, useMediaQuery } from '@mui/material'
 import { Facebook, Twitter, Instagram } from '@mui/icons-material'
 
 const STYLE_SOCIAL_ICON = {
@@ -35,7 +6,11 @@ const STYLE_SOCIAL_ICON = {
   alignItems: 'center',
   textTransform: 'uppercase'
 }
+
 const SocialMediaIcons = () => {
+  const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+  const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md'))
+
   return (
     <Box
       sx={{
@@ -53,20 +28,65 @@ const SocialMediaIcons = () => {
       }}
     >
       <Link href="#" underline="none" sx={STYLE_SOCIAL_ICON}>
-        <Facebook />
-        <Typography variant="body2" component="span" ml={1}>
+        <Facebook
+          sx={{
+            fontSize: isSmallDevice ? '18px' : isMediumDevice ? '20px' : '22px'
+          }}
+        />
+        <Typography
+          variant="body2"
+          component="span"
+          ml={1}
+          sx={{
+            fontSize: isSmallDevice
+              ? '0.8rem'
+              : isMediumDevice
+                ? '0.875rem'
+                : '1rem'
+          }}
+        >
           Facebook
         </Typography>
       </Link>
       <Link href="#" underline="none" sx={STYLE_SOCIAL_ICON}>
-        <Twitter />
-        <Typography variant="body2" component="span" ml={1}>
+        <Twitter
+          sx={{
+            fontSize: isSmallDevice ? '18px' : isMediumDevice ? '20px' : '22px'
+          }}
+        />
+        <Typography
+          variant="body2"
+          component="span"
+          ml={1}
+          sx={{
+            fontSize: isSmallDevice
+              ? '0.8rem'
+              : isMediumDevice
+                ? '0.875rem'
+                : '1rem'
+          }}
+        >
           Twitter
         </Typography>
       </Link>
       <Link href="#" underline="none" sx={STYLE_SOCIAL_ICON}>
-        <Instagram />
-        <Typography variant="body2" component="span" ml={1}>
+        <Instagram
+          sx={{
+            fontSize: isSmallDevice ? '18px' : isMediumDevice ? '20px' : '22px'
+          }}
+        />
+        <Typography
+          variant="body2"
+          component="span"
+          ml={1}
+          sx={{
+            fontSize: isSmallDevice
+              ? '0.8rem'
+              : isMediumDevice
+                ? '0.875rem'
+                : '1rem'
+          }}
+        >
           Instagram
         </Typography>
       </Link>

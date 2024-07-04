@@ -1,8 +1,11 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useMediaQuery } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import { menu_list } from '../../assets/assets'
 
 function ExploreMenu({ category, setCategory }) {
+  const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm')) // Áp dụng cho màn hình > 600px
+  // const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md')) // Áp dụng cho màn hình > 900px
+  const isLargeDevice = useMediaQuery((theme) => theme.breakpoints.down('lg')) // Áp dụng cho màn hình > 1200px
   return (
     <Box
       sx={{
@@ -17,21 +20,21 @@ function ExploreMenu({ category, setCategory }) {
         sx={{
           color: '#262626',
           fontWeight: 500,
-          fontSize: '2rem'
+          fontSize: isSmallDevice ? '1.5rem' : '2rem'
         }}
       >
         Explore our menu
       </Typography>
       <Typography
         sx={{
-          maxWidth: '60%',
+          fontSize: isSmallDevice ? '14px' : '16px',
+          maxWidth: isLargeDevice ? '100%' : '60%',
           color: '#808080'
         }}
       >
-        Choose from a diverse menu featuring a delectable array of dishes
-        crafted with the finest ingredients and culinary expertise. Our mission
-        is to satisfy your craving and elevate your dining experience, one
-        delicious meal at a time.
+        Choose from a diverse menu featuring a delectable array of dishes. Our
+        mission is to satisfy your craving and elevate your dining experience,
+        one delicious meal at a time.
       </Typography>
       <Box
         sx={{

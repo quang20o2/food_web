@@ -50,7 +50,7 @@ const theme = extendTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          '&.MuiTypography-h2': { fontSize: 'max(2vw, 24px)', fontWeight: 500 }
+          '&.MuiTypography-h2': { fontWeight: 500 }
         }
       }
     },

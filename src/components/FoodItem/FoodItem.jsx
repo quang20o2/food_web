@@ -1,13 +1,23 @@
 import { useContext } from 'react'
-import { Box, IconButton, Typography } from '@mui/material'
+import {
+  Box,
+  IconButton,
+  Rating,
+  Typography,
+  useMediaQuery
+} from '@mui/material'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import { assets } from '../../assets/assets'
+// import { assets } from '../../assets/assets'
 import { StoreContext } from '../../context/StoreContext'
 
 function FoodItem({ id, name, price, description, image }) {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext)
+
+  const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm')) // > 600px
+  const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md')) // > 900px
+  const isLargeDevice = useMediaQuery((theme) => theme.breakpoints.down('lg'))
   return (
     <Box
       sx={{
@@ -104,7 +114,7 @@ function FoodItem({ id, name, price, description, image }) {
       </Box>
       <Box
         sx={{
-          p: '20px'
+          p: isSmallDevice ? '8px' : isMediumDevice ? '14px' : '20px'
         }}
       >
         <Box
@@ -117,25 +127,44 @@ function FoodItem({ id, name, price, description, image }) {
         >
           <Typography
             sx={{
-              fontSize: '20px',
-              fontWeight: 500
+              fontSize: isSmallDevice
+                ? '11px'
+                : isMediumDevice
+                  ? '15px'
+                  : '20px',
+              fontWeight: isSmallDevice ? 550 : 500
             }}
           >
             {name}
           </Typography>
-          <Box
+          {/* <Box
             component="img"
             src={assets.rating_starts}
             alt=""
             sx={{
-              width: '70px'
+              width: isSmallDevice ? '30%' : isMediumDevice ? '40%' : '70px'
+            }}
+          /> */}
+          <Rating
+            name="half-rating"
+            defaultValue={2.5}
+            precision={0.5}
+            sx={{
+              width: '30%',
+              fontSize: isSmallDevice
+                ? '8px'
+                : isMediumDevice
+                  ? '11px'
+                  : isLargeDevice
+                    ? '13px'
+                    : '15px'
             }}
           />
         </Box>
         <Typography
           sx={{
             color: '#676767',
-            fontSize: '12px'
+            fontSize: isSmallDevice ? '8px' : isMediumDevice ? '10px' : '12px'
           }}
         >
           {description}
@@ -143,7 +172,7 @@ function FoodItem({ id, name, price, description, image }) {
         <Typography
           sx={{
             color: 'tomato',
-            fontSize: '22px',
+            fontSize: isSmallDevice ? '18px' : isMediumDevice ? '20px' : '22px',
             fontWeight: 500,
             m: '10px 0'
           }}

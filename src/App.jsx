@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
 import { Route, Routes } from 'react-router-dom'
-import { Box } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
@@ -12,6 +12,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Box
+        // maxWidth="xl"
         sx={{
           width: '80%',
           margin: 'auto'

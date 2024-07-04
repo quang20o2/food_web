@@ -5,7 +5,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography
+  Typography,
+  useMediaQuery
 } from '@mui/material'
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone'
 import ContactMailIcon from '@mui/icons-material/ContactMail'
@@ -19,15 +20,16 @@ const STYLE_FOOTER_CONTENT = {
   gap: '20px'
 }
 function Footer() {
+  const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+  const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md'))
+  const isLargeDevice = useMediaQuery((theme) => theme.breakpoints.down('lg'))
   return (
     <Box
       sx={{
-        // color: '#f4f4f6',
         backgroundColor: '#f4f4f6',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        // gap: '20px',
         p: '20px 8vw',
         pt: '80px',
         mt: '100px'
@@ -37,19 +39,38 @@ function Footer() {
         sx={{
           width: '100%',
           display: 'grid',
-          gridTemplateColumns: '2fr 1fr 1fr',
+          gridTemplateColumns: isMediumDevice ? 'none' : '2fr 1fr 1fr',
           gap: '80px'
         }}
       >
         <Box sx={STYLE_FOOTER_CONTENT}>
-          <Box component="img" src={assets.logo} alt="" />
-          <Typography>
+          <Box
+            component="img"
+            src={assets.logo}
+            alt=""
+            width={
+              isSmallDevice
+                ? '100px'
+                : isMediumDevice
+                  ? '110px'
+                  : isLargeDevice
+                    ? '130px'
+                    : '150px'
+            }
+          />
+          <Typography sx={{ fontSize: isSmallDevice ? '14px' : '16px' }}>
             Join us to bring your family delicious and nutritious dishes.
           </Typography>
           <SocialMediaIcons />
         </Box>
         <Box sx={STYLE_FOOTER_CONTENT}>
-          <Typography variant="h2" sx={{ color: 'tomato' }}>
+          <Typography
+            variant="h2"
+            sx={{
+              color: 'tomato',
+              fontSize: isSmallDevice ? '1.5rem' : '2rem'
+            }}
+          >
             COMPANY
           </Typography>
           <List>
@@ -60,7 +81,13 @@ function Footer() {
           </List>
         </Box>
         <Box sx={STYLE_FOOTER_CONTENT}>
-          <Typography variant="h2" sx={{ color: 'tomato' }}>
+          <Typography
+            variant="h2"
+            sx={{
+              color: 'tomato',
+              fontSize: isSmallDevice ? '1.5rem' : '2rem'
+            }}
+          >
             GET IN TOUCH
           </Typography>
           <List>
@@ -98,7 +125,7 @@ function Footer() {
           border: 'none'
         }}
       />
-      <Typography>
+      <Typography textAlign={{ xs: 'center' }}>
         Copyright 2024 © Tomato.com - All rights reserved.
       </Typography>
     </Box>
