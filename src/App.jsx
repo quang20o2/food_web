@@ -1,12 +1,13 @@
 import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
 import { Route, Routes } from 'react-router-dom'
-import { Box, Container } from '@mui/material'
+import Box from '@mui/material/Box'
 import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import Footer from './components/Footer/Footer'
+import UpToTop from './components/Uptotop/Uptotop'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         </Routes>
       </Box>
       <Footer />
+      <UpToTop />
     </ThemeProvider>
   )
 }

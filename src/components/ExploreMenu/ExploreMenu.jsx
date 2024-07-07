@@ -4,10 +4,11 @@ import { menu_list } from '../../assets/assets'
 
 function ExploreMenu({ category, setCategory }) {
   const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm')) // Áp dụng cho màn hình > 600px
-  // const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md')) // Áp dụng cho màn hình > 900px
   const isLargeDevice = useMediaQuery((theme) => theme.breakpoints.down('lg')) // Áp dụng cho màn hình > 1200px
+
   return (
     <Box
+      id="menu"
       sx={{
         display: 'flex',
         flexDirection: 'column',

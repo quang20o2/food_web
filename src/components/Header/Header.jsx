@@ -25,7 +25,7 @@ const StyledContentBox = styled(Box)({
   flexDirection: 'column',
   alignItems: 'start',
   gap: '1.5vw',
-  bottom: '20%',
+  bottom: '12%',
   left: '6vw',
   opacity: 0,
   animation: 'fadeInUp 0.8s ease-in-out 0.5s forwards',
@@ -53,10 +53,9 @@ const StyledButton = styled(Button)({
 })
 
 function Header() {
-  // const isMobileDevice = useMediaQuery((theme) => theme.breakpoints.down('xs')) // Áp dụng cho màn hình >
   const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm')) // Áp dụng cho màn hình > 600px
   const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md')) // Áp dụng cho màn hình > 900px
-  // const isLargeDevice = useMediaQuery((theme) => theme.breakpoints.down('lg')) // Áp dụng cho màn hình > 1200px
+
   return (
     <StyledBox>
       <StyledContentBox

@@ -25,6 +25,7 @@ function Footer() {
   const isLargeDevice = useMediaQuery((theme) => theme.breakpoints.down('lg'))
   return (
     <Box
+      id="contact us"
       sx={{
         backgroundColor: '#f4f4f6',
         display: 'flex',
@@ -98,7 +99,15 @@ function Footer() {
                   color: 'black'
                 }}
               >
-                <ContactPhoneIcon />
+                <ContactPhoneIcon
+                  sx={{
+                    fontSize: isSmallDevice
+                      ? '18px'
+                      : isMediumDevice
+                        ? '20px'
+                        : '22px'
+                  }}
+                />
               </ListItemIcon>
               <ListItemText>(+84) 987 654 321</ListItemText>
             </ListItem>
@@ -109,7 +118,15 @@ function Footer() {
                   color: 'black'
                 }}
               >
-                <ContactMailIcon />
+                <ContactMailIcon
+                  sx={{
+                    fontSize: isSmallDevice
+                      ? '18px'
+                      : isMediumDevice
+                        ? '20px'
+                        : '22px'
+                  }}
+                />
               </ListItemIcon>
               <ListItemText>contact@tomato.com</ListItemText>
             </ListItem>

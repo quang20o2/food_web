@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, animateScroll as scroll } from 'react-scroll'
 import Box from '@mui/material/Box'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
@@ -56,20 +57,36 @@ function Navbar() {
           gap: { md: 2.5, lg: 3.8, xl: 6.25 },
           justifyContent: 'space-between',
           alignItems: 'center',
-          color: '#49557e',
+          // color: '#49557e',
           cursor: 'pointer'
         }}
       >
         {['Home', 'Menu', 'Mobile App', 'Contact Us'].map((item) => (
-          <Typography
+          <Link
             key={item}
-            fontSize={{ md: 15, lg: 18, xl: 22 }}
-            variant="body1"
-            sx={activeMenu === item ? activeMenuStyle : {}}
-            onClick={() => handleMenuClick(item)}
+            to={item.toLowerCase()} // Sử dụng tên thẻ Box dưới dạng id
+            smooth={true} // Scroll mượt mà
+            duration={500} // Thời gian scroll (500ms)
+            spy={true} // Theo dõi vị trí scroll
+            activeClass="active-menu" // Class được thêm khi section trở thành active
           >
-            {item}
-          </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: isMediumDevice
+                  ? '15px'
+                  : isLargeDevice
+                    ? '18px'
+                    : '22px',
+                color: '#49557e',
+                textDecoration: 'none',
+                ...(activeMenu === item ? activeMenuStyle : {})
+              }}
+              onClick={() => handleMenuClick(item)}
+            >
+              {item}
+            </Typography>
+          </Link>
         ))}
       </Box>
 

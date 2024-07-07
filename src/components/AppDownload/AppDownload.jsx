@@ -5,6 +5,7 @@ import DownloadButtons from './DownloadButton'
 function AppDownload() {
   return (
     <Box
+      id="mobile app"
       sx={{
         m: 'auto auto',
         mt: '100px',
