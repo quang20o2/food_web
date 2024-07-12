@@ -17,7 +17,7 @@ const SocialMediaIcons = () => {
         display: 'flex',
         justifyContent: 'center',
         '& > a': {
-          m: 2,
+          m: isSmallDevice ? 1 : 2,
           color: 'inherit',
           textDecoration: 'none',
           transition: 'transform 0.3s',
@@ -27,7 +27,12 @@ const SocialMediaIcons = () => {
         }
       }}
     >
-      <Link href="#" underline="none" sx={STYLE_SOCIAL_ICON}>
+      <Link
+        href="https://www.facebook.com/quang.banana.2k2"
+        underline="none"
+        sx={STYLE_SOCIAL_ICON}
+        target="_blank"
+      >
         <Facebook
           sx={{
             fontSize: isSmallDevice ? '18px' : isMediumDevice ? '20px' : '22px'
@@ -48,10 +53,14 @@ const SocialMediaIcons = () => {
           Facebook
         </Typography>
       </Link>
-      <Link href="#" underline="none" sx={STYLE_SOCIAL_ICON}>
+      <Link
+        href="#"
+        underline="none"
+        sx={STYLE_SOCIAL_ICON} /*target="_blank"*/
+      >
         <Twitter
           sx={{
-            fontSize: isSmallDevice ? '18px' : isMediumDevice ? '20px' : '22px'
+            fontSize: isSmallDevice ? '12px' : isMediumDevice ? '20px' : '22px'
           }}
         />
         <Typography
@@ -69,10 +78,14 @@ const SocialMediaIcons = () => {
           Twitter
         </Typography>
       </Link>
-      <Link href="#" underline="none" sx={STYLE_SOCIAL_ICON}>
+      <Link
+        href="#"
+        underline="none"
+        sx={STYLE_SOCIAL_ICON} /*target="_blank"*/
+      >
         <Instagram
           sx={{
-            fontSize: isSmallDevice ? '18px' : isMediumDevice ? '20px' : '22px'
+            fontSize: isSmallDevice ? '12px' : isMediumDevice ? '20px' : '22px'
           }}
         />
         <Typography

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import Box from '@mui/material/Box'
 import SearchIcon from '@mui/icons-material/Search'
@@ -10,14 +10,19 @@ import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { assets } from '../../assets/assets'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { StoreContext } from '../../context/StoreContext'
 
 const activeMenuStyle = {
   pb: '2px',
   borderBottom: '2px solid #49557e'
 }
 
-function Navbar() {
+function Navbar({ setShowLogin }) {
   const [activeMenu, setActiveMenu] = useState('Home')
+  const { getTotalCartAmount } = useContext(StoreContext)
+
+  const navigate = useNavigate()
 
   const isSmallDevice = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   const isMediumDevice = useMediaQuery((theme) => theme.breakpoints.down('md'))
@@ -25,6 +30,16 @@ function Navbar() {
 
   const handleMenuClick = (menuName) => {
     setActiveMenu(menuName)
+  }
+
+  const handleLogoClick = () => {
+    setActiveMenu('Home')
+    // Chuyển hướng đến trang Home
+    navigate('/')
+  }
+
+  const handleCartClick = () => {
+    navigate('/cart')
   }
 
   return (
@@ -48,6 +63,8 @@ function Navbar() {
                 ? '130px'
                 : '150px'
         }
+        onClick={handleLogoClick}
+        sx={{ cursor: 'pointer' }}
       />
 
       {/* Navigation Links */}
@@ -82,7 +99,14 @@ function Navbar() {
                 textDecoration: 'none',
                 ...(activeMenu === item ? activeMenuStyle : {})
               }}
-              onClick={() => handleMenuClick(item)}
+              onClick={(e) => {
+                if (item === 'Home') {
+                  // Quay về trang chủ khi click vào "Home"
+                  handleLogoClick(e)
+                } else {
+                  handleMenuClick(item)
+                }
+              }}
             >
               {item}
             </Typography>
@@ -110,7 +134,9 @@ function Navbar() {
           <Badge
             color="warning"
             variant="dot"
-            sx={{ cursor: 'pointer', position: 'relative' }}
+            sx={{ cursor: 'pointer', position: 'relative', zIndex: 0 }}
+            onClick={handleCartClick}
+            invisible={getTotalCartAmount() === 0}
           >
             <ShoppingCartIcon
               sx={{ color: '#49557e' }}
@@ -139,6 +165,7 @@ function Navbar() {
           disableRipple
           variant="outlined"
           endIcon={<LoginSharp fontSize={isSmallDevice ? 'small' : 'medium'} />}
+          onClick={() => setShowLogin(true)}
         >
           Sign in
         </Button>

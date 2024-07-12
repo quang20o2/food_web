@@ -12,12 +12,12 @@ function FoodDisplay({ category }) {
   return (
     <Box
       sx={{
-        mt: '30px'
+        mt: isSmallDevice ? '15px' : '30px'
       }}
     >
       <Typography
         variant="h2"
-        sx={{ fontSize: isSmallDevice ? '1.5rem' : '2rem' }}
+        sx={{ fontSize: isSmallDevice ? '1.2rem' : '2rem' }}
       >
         Top dishes near you
       </Typography>

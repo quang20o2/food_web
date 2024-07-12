@@ -1,3 +1,4 @@
+import { outlinedInputClasses } from '@mui/material'
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
 
 // Create a theme instance.
@@ -58,29 +59,65 @@ const theme = extendTheme({
       styleOverrides: {
         root: { width: 'auto', cursor: 'pointer' }
       }
+    },
+
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '--TextField-brandBorderColor': '#E0E3E7',
+          '--TextField-brandBorderHoverColor': '#B2BAC2',
+          '--TextField-brandBorderFocusedColor': '#ff6347',
+          '& label.Mui-focused': {
+            color: 'var(--TextField-brandBorderFocusedColor)'
+          }
+        }
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          borderColor: 'var(--TextField-brandBorderColor)'
+        },
+        root: {
+          [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
+            borderColor: 'var(--TextField-brandBorderHoverColor)'
+          },
+          [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
+            borderColor: 'var(--TextField-brandBorderFocusedColor)'
+          }
+        }
+      }
+    },
+    MuiFilledInput: {
+      styleOverrides: {
+        root: {
+          '&::before, &::after': {
+            borderBottom: 'none'
+          },
+          '&:hover:not(.Mui-disabled, .Mui-error):before': {
+            borderBottom: 'none'
+          },
+          '&.Mui-focused:after': {
+            borderBottom: 'none'
+          }
+        }
+      }
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          '&::before': {
+            borderBottom: 'none'
+          },
+          '&:hover:not(.Mui-disabled, .Mui-error):before': {
+            borderBottom: 'none'
+          },
+          '&.Mui-focused:after': {
+            borderBottom: 'none'
+          }
+        }
+      }
     }
-    // MuiInputLabel: {
-    //   styleOverrides: {
-    //     root: { fontSize: '0.875rem' }
-    //   }
-    // },
-    // MuiTypography: {
-    //   styleOverrides: {
-    //     root: {
-    //       '&.MuiTypography-body1': { fontSize: '0.875rem' }
-    //     }
-    //   }
-    // },
-    // MuiOutlinedInput: {
-    //   styleOverrides: {
-    //     root: {
-    //       fontSize: '0.875rem',
-    //       '& fieldset': { borderWidth: '1px !important' },
-    //       '&:hover fieldset': { borderWidth: '2px !important' },
-    //       '&.Mui-focused fieldset': { borderWidth: '2px !important' }
-    //     }
-    //   }
-    // }
   }
 
   // ...other properties

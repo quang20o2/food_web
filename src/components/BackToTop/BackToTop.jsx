@@ -32,7 +32,7 @@ function UpToTop() {
   }
 
   return (
-    <Tooltip title="Up to top">
+    <Tooltip title="Back to top">
       <Zoom in={isVisible}>
         <Fab
           onClick={scrollToTop}
@@ -43,8 +43,8 @@ function UpToTop() {
             height: isSmallDevice ? '20px' : '36px',
             minHeight: '20px',
             position: 'fixed',
-            bottom: 16,
-            right: 16,
+            bottom: isSmallDevice ? 50 : 100,
+            right: isSmallDevice ? 10 : 30,
             backgroundColor: 'tomato',
             color: '#fff',
             '&:hover': {

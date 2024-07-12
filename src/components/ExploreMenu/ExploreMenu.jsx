@@ -21,14 +21,14 @@ function ExploreMenu({ category, setCategory }) {
         sx={{
           color: '#262626',
           fontWeight: 500,
-          fontSize: isSmallDevice ? '1.5rem' : '2rem'
+          fontSize: isSmallDevice ? '1.2rem' : '2rem'
         }}
       >
         Explore our menu
       </Typography>
       <Typography
         sx={{
-          fontSize: isSmallDevice ? '14px' : '16px',
+          fontSize: isSmallDevice ? '11px' : '16px',
           maxWidth: isLargeDevice ? '100%' : '60%',
           color: '#808080'
         }}
@@ -44,7 +44,7 @@ function ExploreMenu({ category, setCategory }) {
           alignItems: 'center',
           gap: '30px',
           textAlign: 'center',
-          m: '20px 0',
+          m: isSmallDevice ? '0.5px 0' : '20px 0',
           overflowX: 'scroll',
           '&::-webkit-scrollbar': {
             display: 'none'
@@ -63,7 +63,7 @@ function ExploreMenu({ category, setCategory }) {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '10px'
+              gap: isSmallDevice ? '2px' : '10px'
             }}
           >
             <Box
@@ -72,12 +72,14 @@ function ExploreMenu({ category, setCategory }) {
               alt=""
               sx={{
                 width: '7.5vw',
-                minWidth: '80px',
+                minWidth: isSmallDevice ? '47px' : '80px',
                 cursor: 'pointer',
                 borderRadius: '50px',
                 transition: '0.2s',
                 ...(category === item.menu_name && {
-                  border: '4px solid tomato',
+                  border: isSmallDevice
+                    ? '2px solid tomato'
+                    : '4px solid tomato',
                   padding: '2px',
                   borderRadius: '75px'
                 })
@@ -86,7 +88,7 @@ function ExploreMenu({ category, setCategory }) {
             <Typography
               sx={{
                 color: '#747474',
-                fontSize: 'max(1.4vw, 16px)'
+                fontSize: isSmallDevice ? '10px' : 'max(1.4vw,16px)'
               }}
             >
               {item.menu_name}

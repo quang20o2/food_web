@@ -46,12 +46,14 @@ function FoodItem({ id, name, price, description, image }) {
         {!cartItems[id] ? (
           <IconButton
             sx={{
-              width: '35px',
+              width: isSmallDevice ? '22px' : '38px',
+              height: 'auto',
               position: 'absolute',
-              bottom: '15px',
-              right: '15px',
-              p: '6px',
+              bottom: isSmallDevice ? '10px' : '16px',
+              right: isSmallDevice ? '10px' : '16px',
+              p: isSmallDevice ? '4px' : '6px',
               backgroundColor: 'white',
+              border: '1px solid tomato',
               '&:hover': {
                 backgroundColor: 'white' // Giữ nguyên màu nền khi hover
               }
@@ -59,18 +61,23 @@ function FoodItem({ id, name, price, description, image }) {
             aria-label="AddToCart"
             onClick={() => addToCart(id)}
           >
-            <AddShoppingCartIcon sx={{ fill: 'black' }} />
+            <AddShoppingCartIcon
+              sx={{
+                fill: 'tomato',
+                fontSize: isSmallDevice ? '12px' : '1.5rem'
+              }}
+            />
           </IconButton>
         ) : (
           <Box
             sx={{
               position: 'absolute',
-              bottom: '15px',
-              right: '15px',
+              bottom: isSmallDevice ? '10px' : '16px',
+              right: isSmallDevice ? '10px' : '16px',
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
-              p: '6px',
+              gap: '5px',
+              p: isSmallDevice ? '2px' : '6px',
               borderRadius: '50px',
               backgroundColor: '#ffffff',
               '&:hover': {
@@ -81,8 +88,8 @@ function FoodItem({ id, name, price, description, image }) {
             <IconButton
               sx={{
                 color: '#e53935',
-                width: '30px',
-                height: '30px',
+                width: isSmallDevice ? '20px' : '30px',
+                height: isSmallDevice ? '20px' : '30px',
                 backgroundColor: '#ffcdd2',
                 '&:hover': {
                   backgroundColor: '#ffcdd2' // Giữ nguyên màu nền khi hover
@@ -91,14 +98,16 @@ function FoodItem({ id, name, price, description, image }) {
               aria-label="Remove"
               onClick={() => removeFromCart(id)}
             >
-              <RemoveIcon />
+              <RemoveIcon
+                sx={{ fontSize: isSmallDevice ? '12px' : '1.5rem' }}
+              />
             </IconButton>
             <Typography>{cartItems[id]}</Typography>
             <IconButton
               sx={{
                 color: '#43a047',
-                width: '30px',
-                height: '30px',
+                width: isSmallDevice ? '20px' : '30px',
+                height: isSmallDevice ? '20px' : '30px',
                 backgroundColor: '#c8e6c9',
                 '&:hover': {
                   backgroundColor: '#c8e6c9' // Giữ nguyên màu nền khi hover
@@ -107,7 +116,7 @@ function FoodItem({ id, name, price, description, image }) {
               aria-label="Add"
               onClick={() => addToCart(id)}
             >
-              <AddIcon />
+              <AddIcon sx={{ fontSize: isSmallDevice ? '12px' : '1.5rem' }} />
             </IconButton>
           </Box>
         )}
@@ -137,14 +146,7 @@ function FoodItem({ id, name, price, description, image }) {
           >
             {name}
           </Typography>
-          {/* <Box
-            component="img"
-            src={assets.rating_starts}
-            alt=""
-            sx={{
-              width: isSmallDevice ? '30%' : isMediumDevice ? '40%' : '70px'
-            }}
-          /> */}
+
           <Rating
             name="half-rating"
             defaultValue={2.5}

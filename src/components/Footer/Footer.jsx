@@ -59,7 +59,7 @@ function Footer() {
                     : '150px'
             }
           />
-          <Typography sx={{ fontSize: isSmallDevice ? '14px' : '16px' }}>
+          <Typography sx={{ fontSize: isSmallDevice ? '10px' : '16px' }}>
             Join us to bring your family delicious and nutritious dishes.
           </Typography>
           <SocialMediaIcons />
